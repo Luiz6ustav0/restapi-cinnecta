@@ -1,0 +1,27 @@
+{
+  "name": "word_vec_api",
+  "version": "1.0.0",
+  "description": "API for Cinnecta's internship test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luiz6ustav0/word_vec_api.git"
+  },
+  "author": "Luiz G. Almeida de Oliveira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Luiz6ustav0/word_vec_api/issues"
+  },
+  "homepage": "https://github.com/Luiz6ustav0/word_vec_api#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.11.17",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
