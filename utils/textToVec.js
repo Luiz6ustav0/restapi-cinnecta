@@ -44,7 +44,7 @@ class textToVec {
         let freqVecs = this.creteFrequencyVecs(vocab, arr1, arr2);
         console.log("\n\n"); console.log(freqVecs.freqVec1, vocab);
 
-        return { vocab: vocab, vec1: freqVecs.freqVec1, vec2: freqVecs.freqVec2 };
+        return { vocabulary: vocab, vec1: freqVecs.freqVec1, vec2: freqVecs.freqVec2 };
     }
 
 
