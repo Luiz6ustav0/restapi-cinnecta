@@ -79,5 +79,5 @@ describe("text utils functions", () => {
     let res = tVec.create2WordsFrequencyVec(cleanTexts[0]);
 
     expect(res).toEqual(expected);
-  })
+  });
 });

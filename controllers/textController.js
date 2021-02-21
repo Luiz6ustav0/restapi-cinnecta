@@ -1,11 +1,11 @@
 const Text = require("../models/texts");
 const textToVec = require("../utils/textToVec");
 
-const getVocab = async (req, res) => {
+const getSingleWordVocab = async (req, res) => {
   try {
     const textInfo = await Text.findOne({});
     if (textInfo.vocab && textInfo.vocab.length > 0) {
-      res.status(200).json(textInfo.vocab);
+      res.status(200).json(textInfo.vocab[0]);
     } else {
       res.status(404).json(err);
     }
@@ -41,12 +41,16 @@ const postNTexts = (req, res) => {
     return tVec.cleanText(text.body);
   });
   cleanedTexts.map((arr) => tVec.createVocab(arr));
+  tVec.create2wordsVocab();
   let frequencyArrs = cleanedTexts.map((arr) => tVec.createFrequencyVec(arr));
+  let frequencyArrs2words = cleanedTexts.map((arr) =>
+    tVec.create2WordsFrequencyVec(arr)
+  );
 
   let newItem = Text({
-    vocab: tVec.vocabulary,
+    vocab: [tVec.vocabulary, tVec.vocabulary2words],
     singleWordFrequencyVecs: frequencyArrs,
-    twoWordsFrequencyVecs: frequencyArrs,
+    twoWordsFrequencyVecs: frequencyArrs2words,
   });
 
   newItem
@@ -59,10 +63,10 @@ const postNTexts = (req, res) => {
 
 const clean = async (req, res) => {
   try {
-    Text.deleteMany({}).then(result => res.status(200).send());
+    Text.deleteMany({}).then((result) => res.status(200).send());
   } catch (err) {
     res.status(500).json(err);
   }
 };
 
-module.exports = { getVocab, getSingleWordVecs, postNTexts, clean };
+module.exports = { getSingleWordVocab, getSingleWordVecs, postNTexts, clean };
