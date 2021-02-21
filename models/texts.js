@@ -6,14 +6,10 @@ const textSchema = new Schema({
     type: Object,
     required: true,
   },
-  singleWordFrequencyVecs: {
+  wordFrequencyVecs: {
     type: Object,
     required: true,
-  },
-  twoWordsFrequencyVecs: {
-    type: Object,
-    required: true,
-  },
+  }
 });
 
 const Text = mongoose.model("Text", textSchema);
