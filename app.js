@@ -1,8 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const { login, pw, db } = require('./secrets');
+const { login, pw, db } = require('./.secrets');
 
+const textApi = require('./routes/textApi');
 
 const app = express();
 
@@ -17,3 +18,5 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 // middleware
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
+
+app.use('/api', textApi);
