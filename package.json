@@ -2,11 +2,10 @@
     "name": "word_vec_api",
     "version": "1.0.0",
     "description": "API for Cinnecta's internship test",
-    "main": "index.js",
+    "main": "app.js",
     "scripts": {
         "start": "nodemon --watch ./ app.js",
-        "test:watch": "jest --watchAll",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "jest --watchAll"
     },
     "repository": {
         "type": "git",
