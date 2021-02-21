@@ -1,11 +1,15 @@
 const Text = require("../models/texts");
 const textToVec = require("../utils/textToVec");
 
-const getSingleWordVocab = async (req, res) => {
+const getVocab = async (req, res) => {
   try {
+    let twoWords = req.query.two_words;
+    let index = 0;
+    if (twoWords == "true") index = 1;
+    
     const textInfo = await Text.findOne({});
-    if (textInfo.vocab && textInfo.vocab.length > 0) {
-      res.status(200).json(textInfo.vocab[0]);
+    if (textInfo.vocab && textInfo.vocab[index].length > 0) {
+      res.status(200).json(textInfo.vocab[index]);
     } else {
       res.status(404).json(err);
     }
@@ -69,4 +73,4 @@ const clean = async (req, res) => {
   }
 };
 
-module.exports = { getSingleWordVocab, getSingleWordVecs, postNTexts, clean };
+module.exports = { getVocab, getSingleWordVecs, postNTexts, clean };

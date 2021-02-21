@@ -5,7 +5,7 @@ const textController = require("../controllers/textController");
 
 const Text = require("../models/texts");
 
-router.get("/vocabsingle", textController.getSingleWordVocab);
+router.get("/vocab", textController.getVocab);
 
 router.get("/singleWordVecs", textController.getSingleWordVecs);
 
