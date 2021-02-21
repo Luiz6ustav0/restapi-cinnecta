@@ -1,28 +1,31 @@
 {
-  "name": "word_vec_api",
-  "version": "1.0.0",
-  "description": "API for Cinnecta's internship test",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon --watch ./ app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Luiz6ustav0/word_vec_api.git"
-  },
-  "author": "Luiz G. Almeida de Oliveira",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Luiz6ustav0/word_vec_api/issues"
-  },
-  "homepage": "https://github.com/Luiz6ustav0/word_vec_api#readme",
-  "dependencies": {
-    "express": "^4.17.1",
-    "mongoose": "^5.11.17",
-    "morgan": "^1.10.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
-  }
+    "name": "word_vec_api",
+    "version": "1.0.0",
+    "description": "API for Cinnecta's internship test",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon --watch ./ app.js",
+        "test:watch": "jest --watchAll",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Luiz6ustav0/word_vec_api.git"
+    },
+    "author": "Luiz G. Almeida de Oliveira",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Luiz6ustav0/word_vec_api/issues"
+    },
+    "homepage": "https://github.com/Luiz6ustav0/word_vec_api#readme",
+    "dependencies": {
+        "express": "^4.17.1",
+        "jest": "^26.6.3",
+        "mongoose": "^5.11.17",
+        "morgan": "^1.10.0"
+    },
+    "devDependencies": {
+        "@types/jest": "^26.0.20",
+        "nodemon": "^2.0.7"
+    }
 }

@@ -1,20 +1,22 @@
 class textToVec {
+  vocabulary = [];
+
   cleanText(text) {
     text = text.toLowerCase();
     text = text.replace(/[`~!()_|+?;@#"$\-=%^&*:',.<>]/gi, " ");
     text = text.split(" ").filter((word) => word.length > 3);
+
     return text;
   }
 
-  createVocab(arr, arr2) {
-    let set2 = new Set(arr2);
-    let vocab = new Set(arr);
-
-    for (let elem of set2) {
-      vocab.add(elem);
-    }
-
-    return vocab;
+  createVocab(arrVec) {
+    arrVec.map((text) => {
+      let vocab = Array(...new Set(text));
+      vocab.map((word) => {
+        if (!this.vocabulary.includes(word)) this.vocabulary.push(word);
+      });
+    });
+    return this.vocabulary;
   }
 
   creteFrequencyVecs(vocabulary, arr1, arr2) {
