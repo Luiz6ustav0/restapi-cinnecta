@@ -3,14 +3,18 @@ const Schema = mongoose.Schema;
 
 const textSchema = new Schema({
     wholeText: {
-        type: String,
-        required: true
-    },
-    textDict: {
         type: Object,
         required: true
     },
-    textDict2words: {
+    vocab: {
+        type: Object,
+        required: true
+    },
+    textDicts: {
+        type: Object,
+        required: true
+    },
+    textDicts2words: {
         type: Object,
         required: true
     }
