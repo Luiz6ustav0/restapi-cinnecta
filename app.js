@@ -1,22 +1,24 @@
-const express = require('express');
-const morgan = require('morgan');
-const mongoose = require('mongoose');
-const { login, pw, db } = require('./.secrets');
+const express = require("express");
+const morgan = require("morgan");
+const mongoose = require("mongoose");
+const { login, pw, db } = require("./.secrets");
 
-const textApi = require('./routes/textApi');
+const textApi = require("./routes/textApi");
 
 const app = express();
 
 const dbURI = `mongodb+srv://${login}:${pw}@cluster0.l6tbh.mongodb.net/${db}?retryWrites=true&w=majority`;
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then((result) => {
-        console.log("App Running\nListenning to port 3000");
-        app.listen(3000);
-    })
-    .catch((err) => console.log(err));
+mongoose
+  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((result) => {
+    console.log("App Running\nListenning to port 3000");
+    app.listen(3000);
+  })
+  .catch((err) => console.log(err));
 
 // middleware
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api', textApi);
+app.use(express.json());
+app.use("/api", textApi);
