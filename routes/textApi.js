@@ -5,18 +5,33 @@ const textToVec = require("../utils/textToVec");
 const Text = require("../models/texts");
 
 router.get("/vocab", async (req, res) => {
-    try {
-        const textInfo = await Text.findOne({});
-        if (textInfo.vocab && textInfo.vocab.length > 0) {
-            res.status(200).json(textInfo.vocab);
-        } else {
-            res.status(404).json(err);
-        }
+  try {
+    const textInfo = await Text.findOne({});
+    if (textInfo.vocab && textInfo.vocab.length > 0) {
+      res.status(200).json(textInfo.vocab);
+    } else {
+      res.status(404).json(err);
     }
-    catch (err) {
-        res.status(500).json(err);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/singleWordVecs", async (req, res) => {
+  try {
+    const textInfo = await Text.find({});
+    console.log(textInfo[0]);
+    if (textInfo && textInfo[0].singleWordFrequencyVecs.length > 0) {
+      res
+        .status(200)
+        .json({ vectorsPerDocument: textInfo[0].singleWordFrequencyVecs });
+    } else {
+      res.status(404).json(err);
     }
-})
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.post("/", (req, res) => {
   const body = req.body;
