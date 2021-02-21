@@ -54,7 +54,7 @@ describe("text utils functions", () => {
 
     tVec.createVocab(text);
     tVec.createVocab(text2);
-    const res = tVec.create2wordVocab();
+    const res = tVec.create2wordsVocab();
 
     expect(res).toEqual([
       "falar fácil",
@@ -65,4 +65,19 @@ describe("text utils functions", () => {
       "difícil funcione",
     ]);
   });
+
+  it("should create 2 word frequency vec", () => {
+    const text = "Falar é fácil. Mostre-me o código.";
+    const text2 =
+      "É fácil escrever código. Difícil é escrever código que funcione";
+
+    let cleanTexts = [text, text2].map((t) => tVec.cleanText(t));
+    cleanTexts.map((arr) => tVec.createVocab(arr));
+    tVec.create2wordsVocab();
+
+    let expected = [1, 1, 1, 0, 0, 0];
+    let res = tVec.create2WordsFrequencyVec(cleanTexts[0]);
+
+    expect(res).toEqual(expected);
+  })
 });

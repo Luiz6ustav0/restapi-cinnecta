@@ -18,7 +18,7 @@ class textToVec {
     return this.vocabulary;
   }
 
-  create2wordVocab() {
+  create2wordsVocab() {
     if (this.vocabulary) {
       for (let i = 0; i < this.vocabulary.length - 1; i++) {
         let interestingTwoWords =
@@ -32,6 +32,15 @@ class textToVec {
       );
   }
 
+  create2wordsVec(arr) {
+    let nVec = [];
+    for (let i = 0; i < arr.length - 1; i++) {
+      let interestingTwoWords = arr[i] + " " + arr[i + 1];
+      nVec.push(interestingTwoWords);
+    }
+    return nVec;
+  }
+
   createFrequencyVec(vec) {
     let freqVec1 = new Array(this.vocabulary.length);
     for (let i = 0; i < this.vocabulary.length; i++) freqVec1[i] = 0;
@@ -43,6 +52,22 @@ class textToVec {
     }
 
     return freqVec1;
+  }
+
+  create2WordsFrequencyVec(vec) {
+    let freqVec = new Array(this.vocabulary2words.length);
+    let tempVec = this.create2wordsVec(vec);
+    for (let i = 0; i < this.vocabulary2words.length; i++) freqVec[i] = 0;
+
+    for (let i = 0; i < this.vocabulary2words.length; ++i) {
+      if (tempVec.includes(this.vocabulary2words[i])) {
+        freqVec[i] = tempVec.filter(
+          (w) => w == this.vocabulary2words[i]
+        ).length;
+      }
+    }
+
+    return freqVec;
   }
 }
 
