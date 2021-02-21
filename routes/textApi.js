@@ -7,7 +7,7 @@ const Text = require("../models/texts");
 
 router.get("/vocab", textController.getVocab);
 
-router.get("/singleWordVecs", textController.getSingleWordVecs);
+router.get("/wordfreq", textController.getWordFrequencyVecs);
 
 router.post("/", textController.postNTexts);
 

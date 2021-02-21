@@ -6,7 +6,7 @@ const getVocab = async (req, res) => {
     let twoWords = req.query.two_words;
     let index = 0;
     if (twoWords == "true") index = 1;
-    
+
     const textInfo = await Text.findOne({});
     if (textInfo.vocab && textInfo.vocab[index].length > 0) {
       res.status(200).json(textInfo.vocab[index]);
@@ -18,13 +18,17 @@ const getVocab = async (req, res) => {
   }
 };
 
-const getSingleWordVecs = async (req, res) => {
+const getWordFrequencyVecs = async (req, res) => {
   try {
+    let twoWords = req.query.two_words;
+    let index = 0;
+    if (twoWords == "true") index = 1;
+
     const textInfo = await Text.find({});
-    if (textInfo && textInfo[0].singleWordFrequencyVecs.length > 0) {
+    if (textInfo && textInfo[0].wordFrequencyVecs[index].length > 0) {
       res
         .status(200)
-        .json({ vectorsPerDocument: textInfo[0].singleWordFrequencyVecs });
+        .json({ vectorsPerDocument: textInfo[0].wordFrequencyVecs[index] });
     } else {
       res.status(404).json(err);
     }
@@ -53,8 +57,7 @@ const postNTexts = (req, res) => {
 
   let newItem = Text({
     vocab: [tVec.vocabulary, tVec.vocabulary2words],
-    singleWordFrequencyVecs: frequencyArrs,
-    twoWordsFrequencyVecs: frequencyArrs2words,
+    wordFrequencyVecs: [frequencyArrs, frequencyArrs2words]
   });
 
   newItem
@@ -73,4 +76,4 @@ const clean = async (req, res) => {
   }
 };
 
-module.exports = { getVocab, getSingleWordVecs, postNTexts, clean };
+module.exports = { getVocab, getWordFrequencyVecs, postNTexts, clean };
