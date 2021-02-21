@@ -1,5 +1,6 @@
 class textToVec {
   vocabulary = [];
+  vocabulary2words = [];
 
   cleanText(text) {
     text = text.toLowerCase();
@@ -15,6 +16,20 @@ class textToVec {
       if (!this.vocabulary.includes(word)) this.vocabulary.push(word);
     });
     return this.vocabulary;
+  }
+
+  create2wordVocab() {
+    if (this.vocabulary) {
+      for (let i = 0; i < this.vocabulary.length - 1; i++) {
+        let interestingTwoWords =
+          this.vocabulary[i] + " " + this.vocabulary[i + 1];
+        this.vocabulary2words.push(interestingTwoWords);
+      }
+      return this.vocabulary2words;
+    } else
+      console.log(
+        "ERROR: Can't create 2 word vocab without single word vocab first"
+      );
   }
 
   createFrequencyVec(vec) {
