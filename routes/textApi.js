@@ -1,29 +1,35 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const textToVec = require('../utils/textToVec');
+const textToVec = require("../utils/textToVec");
 
-const Text = require('../models/texts');
+const Text = require("../models/texts");
 
-router.post('/:text&:text2', (req, res) => {
-    const tVec = new textToVec();
-    let t1 = req.params.text.substring(6);
-    let t2 = req.params.text2.substring(6);
-    let dbObj = tVec.calculateAll(t1, t2);
+router.post("/", (req, res) => {
+  const body = req.body;
+  const tVec = new textToVec();
 
-    const newItem = Text({
-        wholeText: [t1, t2],
-        vocab: dbObj.vocabulary,
-        textDicts: [dbObj.vec1, dbObj.vec2],
-        textDicts2words: [dbObj.vec1, dbObj.vec2]
+  let cleanedTexts = Object.keys(body).map(function (key) {
+    const text = {
+      key: key,
+      body: body[key],
+    };
+    return tVec.cleanText(text.body);
+  });
+  cleanedTexts.map((arr) => tVec.createVocab(arr));
+  let frequencyArrs = cleanedTexts.map((arr) => tVec.createFrequencyVec(arr));
+
+  let newItem = Text({
+    vocab: tVec.vocabulary,
+    singleWordFrequencyVecs: frequencyArrs,
+    twoWordsFrequencyVecs: frequencyArrs,
+  });
+
+  newItem
+    .save()
+    .then((result) => {
+      res.status(201).send();
     })
-
-    newItem.save()
-        .then((result) => {
-            res.status(201).send();
-        })
-        .catch((err) => console.log(err));
-
-    res.status(201).send();
-})
+    .catch((err) => console.log(err));
+});
 
 module.exports = router;
