@@ -11,4 +11,6 @@ router.get("/singleWordVecs", textController.getSingleWordVecs);
 
 router.post("/", textController.postNTexts);
 
+router.delete("/", textController.clean);
+
 module.exports = router;

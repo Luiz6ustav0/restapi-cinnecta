@@ -1,4 +1,5 @@
 const Text = require("../models/texts");
+const textToVec = require("../utils/textToVec");
 
 const getVocab = async (req, res) => {
   try {
@@ -56,4 +57,12 @@ const postNTexts = (req, res) => {
     .catch((err) => console.log(err));
 };
 
-module.exports = { getVocab, getSingleWordVecs, postNTexts };
+const clean = async (req, res) => {
+  try {
+    Text.deleteMany({}).then(result => res.status(200).send());
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+module.exports = { getVocab, getSingleWordVecs, postNTexts, clean };
