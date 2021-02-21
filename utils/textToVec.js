@@ -9,32 +9,25 @@ class textToVec {
     return text;
   }
 
-  createVocab(arrVec) {
-    arrVec.map((text) => {
-      let vocab = Array(...new Set(text));
-      vocab.map((word) => {
-        if (!this.vocabulary.includes(word)) this.vocabulary.push(word);
-      });
+  createVocab(textArr) {
+    let vocab = Array(...new Set(textArr));
+    vocab.map((word) => {
+      if (!this.vocabulary.includes(word)) this.vocabulary.push(word);
     });
     return this.vocabulary;
   }
 
-  creteFrequencyVecs(vocabulary, arr1, arr2) {
-    let freqVec1 = new Array(vocabulary.length);
-    let freqVec2 = new Array(vocabulary.length);
-    for (let i = 0; i < vocabulary.length; i++) freqVec1[i] = 0;
-    for (let i = 0; i < vocabulary.length; i++) freqVec2[i] = 0;
+  createFrequencyVec(vec) {
+    let freqVec1 = new Array(this.vocabulary.length);
+    for (let i = 0; i < this.vocabulary.length; i++) freqVec1[i] = 0;
 
-    for (let i = 0; i < vocabulary.length; ++i) {
-      if (arr1.includes(vocabulary[i])) {
-        freqVec1[i] = arr1.filter((w) => w == vocabulary[i]).length;
-      }
-      if (arr2.includes(vocabulary[i])) {
-        freqVec2[i] = arr2.filter((w) => w == vocabulary[i]).length;
+    for (let i = 0; i < this.vocabulary.length; ++i) {
+      if (vec.includes(this.vocabulary[i])) {
+        freqVec1[i] = vec.filter(w => w == this.vocabulary[i]).length;
       }
     }
 
-    return { freqVec1, freqVec2 };
+    return freqVec1;
   }
 
   calculateAll(text1, text2) {
