@@ -36,14 +36,10 @@ class textToVec {
   }
 
   calculateAll(text1, text2) {
-    var str = "My Big Boy!";
-    var res = str.toLowerCase(); //res is "my big boy!"
     let arr1 = this.cleanText(text1);
     let arr2 = this.cleanText(text2);
     let vocab = [...this.createVocab(arr1, arr2)]; // Converting set back to arr
     let freqVecs = this.creteFrequencyVecs(vocab, arr1, arr2);
-    console.log("\n\n");
-    console.log(freqVecs.freqVec1, vocab);
 
     return {
       vocabulary: vocab,
