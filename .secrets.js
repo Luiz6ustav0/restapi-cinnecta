@@ -1,5 +1,5 @@
-const login = 'dev';
-const pw = 'supp0sed-70b3-s3cur3';
-const db = 'cinnecta';
+const login = '';
+const pw = '';
+const db = '';
 
 module.exports = {login, pw, db};
